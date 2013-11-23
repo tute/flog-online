@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Flog Online</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      Flog Online
+      <small>Measure complexity of your Ruby code</small>
+    </h1>
+
+    <div class="row">
+      <div class="col-md-6">
+        <textarea class="form-control" rows="22"></textarea>
+        <input type="button" value="Calculate">
+      </div>
+
+      <div class="col-md-6">
+        Flog says:
+        <pre id="flog_output"></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <footer style="text-align:center">
+    <a href="http://tutecosta.com/" target="_blank">Tute Costa</a>
+  </footer>
+
+<script>
+$(function(){
+  $('textarea').change(function(){
+    $.post("/validate", { code: $('textarea').val() }, function(data) {
+      $("#flog_output").prepend(data);
+    });
+  });
+})
+</script>
+</body>
+</html>
